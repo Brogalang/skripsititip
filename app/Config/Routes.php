@@ -37,9 +37,10 @@ $routes->get('/Admin', function () {
 });
 
 $routes->post('submit-form', 'Pages::add_aksi');
-$routes->get('data-sales', 'Pages::index');
+$routes->get('tabel-sales', 'Pages::data_sales');
 $routes->get('edit-view/(:num)', 'Pages::singleData/$1');
 $routes->post('update', 'Pages::updatedata');
+$routes->get('delete/(:num)', 'Pages::delete/$1');
 
 /*
  * --------------------------------------------------------------------

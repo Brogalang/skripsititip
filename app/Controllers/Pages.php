@@ -65,9 +65,8 @@ class Pages extends Controller
         $data['sales'] = $this->UserModel->insertsales();
 
         dd($this->request->getVar());
-        return view('pages/data_sales', $data);
-        // return $this->response->redirect(site_url('/data-sales'));
-        // return redirect()->to('/data_sales');
+        return $this->response->redirect(site_url('/tabel-sales'));
+        // return view('pages/data_sales', $data);
     }
     public function updatedata()
     {
@@ -84,8 +83,17 @@ class Pages extends Controller
         $spv = $this->request->getVar('spv');
         $sql="update data_sales set userID='".$userID."', nama_sales='".$nama."', witel='".$witel."',no_telp='".$noTelp."',mitra='".$mitra."',posisi='".$posisi."',tgl_aktif='".$tglAktif."',spv='".$spv."' where id_sales='".$id_sales."'";
         $this->db->query($sql);
-        return view('pages/dashboard', $data2);
+        return $this->response->redirect(site_url('/tabel-sales'));
     }
+
+    public function delete($id = null){
+        // $data2['tittle'] = 'Data Sales | Monitoring Kinerja Sales';
+        $this->db = \Config\Database::connect();
+        $sql="delete from data_sales where id_sales='".$id."'";
+        $this->db->query($sql);
+        return $this->response->redirect(site_url('/tabel-sales'));
+    }
+
     public function singleData($id = null){
         $UserModel = new UserModel();
         $data['tittle'] = 'Data Sales | Monitoring Kinerja Sales';
