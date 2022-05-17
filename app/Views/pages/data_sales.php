@@ -42,7 +42,7 @@
                                 <td><a href="#" class="btn btn-danger btn-sm btn-circle">
                                         <i class="fas fa-trash"></i>
                                     </a></td>
-                                <td><a href="#" class="btn btn-danger btn-sm btn-circle">
+                                <td><a href="'.base_url('edit-view/'.$row['id_sales']).'" class="btn btn-danger btn-sm btn-circle">
                                         <i class="fas fa-pen"></i>
                                     </a></td>
                             </tr>

@@ -65,8 +65,32 @@ class Pages extends Controller
         $data['sales'] = $this->UserModel->insertsales();
 
         dd($this->request->getVar());
-        return $this->response->redirect(site_url('/'));
+        return view('pages/data_sales', $data);
+        // return $this->response->redirect(site_url('/data-sales'));
         // return redirect()->to('/data_sales');
+    }
+    public function updatedata()
+    {
+        $data2['tittle'] = 'Data Sales | Monitoring Kinerja Sales';
+        $this->db = \Config\Database::connect();
+        $id_sales = $this->request->getVar('id_sales');
+        $userID = $this->request->getVar('userID');
+        $nama = $this->request->getVar('nama_sales');
+        $witel = $this->request->getVar('witel');
+        $noTelp = $this->request->getVar('no_telp');
+        $mitra = $this->request->getVar('mitra');
+        $posisi = $this->request->getVar('posisi');
+        $tglAktif = $this->request->getVar('tgl_aktif');
+        $spv = $this->request->getVar('spv');
+        $sql="update data_sales set userID='".$userID."', nama_sales='".$nama."', witel='".$witel."',no_telp='".$noTelp."',mitra='".$mitra."',posisi='".$posisi."',tgl_aktif='".$tglAktif."',spv='".$spv."' where id_sales='".$id_sales."'";
+        $this->db->query($sql);
+        return view('pages/dashboard', $data2);
+    }
+    public function singleData($id = null){
+        $UserModel = new UserModel();
+        $data['tittle'] = 'Data Sales | Monitoring Kinerja Sales';
+        $data['salesobj'] = $UserModel->editdatacust($id);
+        return view('pages/edit_view', $data);
     }
 
     public function rating()

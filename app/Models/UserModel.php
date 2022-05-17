@@ -13,6 +13,7 @@ class UserModel extends Model
     protected $request;
     protected $table = 'data_sales';
 
+
     public function __construct()
     {
         //inisialisasi koneksi
@@ -39,6 +40,20 @@ class UserModel extends Model
     {
         //pembuatan query
         $sql = "SELECT * FROM customer";
+
+        //eksekusi query sql
+        $query = $this->db->query($sql);
+
+        // uraikan hasil query dalam bentuk array
+        $data = $query->getResultArray();
+
+        //kembalikan hasil query ke controller
+        return $data;
+    }
+    public function editdatacust($id)
+    {
+        //pembuatan query
+        $sql = "SELECT * FROM data_sales where id_sales='".$id."'";
 
         //eksekusi query sql
         $query = $this->db->query($sql);
@@ -92,8 +107,8 @@ class UserModel extends Model
     ];
 
     protected $validationRules = [
-        'email'         => 'required|valid_email|is_unique[users.email,id,{id}]',
-        'username'      => 'required|alpha_numeric_punct|min_length[3]|max_length[30]|is_unique[users.username,id,{id}]',
-        'password_hash' => 'required',
+        // 'email'         => 'required|valid_email|is_unique[users.email,id,{id}]',
+        // 'username'      => 'required|alpha_numeric_punct|min_length[3]|max_length[30]|is_unique[users.username,id,{id}]',
+        // 'password_hash' => 'required',
     ];
 }
